@@ -1,0 +1,23 @@
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        /*
+        //find the longest substring  
+        //要返回长度，所以可以就值与所在位置构成一个hashmap  
+        使用双指针，一个用来遍历，一个用来改变开头的位置，如果遇到重复的，就把开始的位置变到最后出现的那次的位置加一上
+        */
+        HashMap<Character, Integer> map = new HashMap<Character,Integer> ();
+        int maxLen = 0;
+        int start = 0;
+        for(int i=0;i<s.length();i++){
+            if(map.containsKey(s.charAt(i))){
+                //map.get(s.charAt(i)) = i;
+                //maxLen = Math.max(maxLen,i-start+1);  这个时候还没有更新max的值，所以会出错的
+                start = Math.max(start,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            maxLen = Math.max(maxLen,i-start+1);
+            
+        }
+        return maxLen;
+    }
+}
