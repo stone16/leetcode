@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        if(x < 0){
+            return false;
+        }
+        int xCopy = x;
+        int mul = 1;
+        while(xCopy/10 > 0){
+            mul *= 10;
+            xCopy /= 10;
+        }
+        while(x > 0){
+            int h = x / mul;
+            int l = x % 10; 
+            if(h != l){
+                return false;
+            }
+            x = x % mul;
+            x = x / 10;
+            mul /= 100;
+        }
+        return true;
+    }
+}
