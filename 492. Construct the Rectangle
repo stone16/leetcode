@@ -1,0 +1,18 @@
+public class Solution {
+    public int[] constructRectangle(int area) {
+        int[] ans = new int[2];
+        if(area <= 0){
+            return ans;
+        }
+        ans[0] = Integer.MAX_VALUE;
+        ans[1] = 0;
+        // suppose i is the width
+        for(int i = 1; i <= Math.sqrt(area); i++){
+            if(area % i == 0 && (area / i - i) < Math.abs(ans[0] - ans[1])){
+                ans[0] = area / i;
+                ans[1] = i;
+            }
+        }
+        return ans;
+    }
+}
