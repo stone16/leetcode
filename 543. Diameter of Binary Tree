@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ // 找从左到每个node的最长距离 和 从右到每个node的最长距离
+public class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int maxAns = 0;
+        // traverse every node
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
+            int temp = maxDepth(node.left) + maxDepth(node.right);
+            maxAns = maxAns > temp? maxAns: temp;
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return maxAns;
+    }
+    
+    public int maxDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(maxDepth(root.left), maxDepth(root.right) ) + 1;
+    }
+}
